@@ -12,17 +12,22 @@ import time
 import random
 pygame.init()
 pygame.display.set_caption('Snake Game Classic')
-#FOR REFERENCE: pygame.display.set_mode([screen width, screen height])
-screen = pygame.display.set_mode((1000,700))
 
-print(pygame.font.get_fonts())
+#Setting Screen
+screen_width = 1000
+screen_height = 700
+screen = pygame.display.set_mode((screen_width,screen_height))
+
 #TEST DIFFERENT FONTS: 'dejavuserif', 'dejavusansmono', 'freesans', 'dejavusans', 'freeserif', 'freemono'
+print(pygame.font.get_fonts())
 font = pygame.font.Sysfont(freesans)
 
 #Sets some standard colors for later usage:
 snake_color = (150,240,0)
 menu_text_color = (0,50,0)
 title_color = (150,240,50)
+black = (0,0,0)
+
 
 
 #Functions
@@ -37,7 +42,8 @@ def create_text(text, font_input, color,surface,x,y):
 def main_menu():
     while True:
         screen = pygame.image.load('soft_green_back.png').convert()
-        create_text("Snake Game Classic", font, title_color, )
+        create_text("Snake Game Classic", font, title_color, screen, )
+
 
 #GAME
 def game_loop():
