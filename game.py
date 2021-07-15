@@ -29,7 +29,6 @@ title_color = (150,240,50)
 black = (0,0,0)
 
 
-
 #Functions
 #Function to create text on the screen
 def create_text(text, font_input, color,surface,x,y):
@@ -41,9 +40,80 @@ def create_text(text, font_input, color,surface,x,y):
 #MAIN MENU
 def main_menu():
     while True:
-        screen = pygame.image.load('soft_green_back.png').convert()
-        create_text("Snake Game Classic", font, title_color, screen, )
+        screen.image.load('soft_green_back.png').convert()
+        create_text("Snake Game Classic", font, title_color, screen, screen_width/2, 100)
+
+        mx, my = pygame.mouse.get_pos()
+
+        #Buttons 1,2,3 are Start, Options, Exit, respectively
+        button_start = pygame.Rect(200, screen_height-200, 100, 50)
+        button_options = pygame.Rect(400, screen_height-200, 100, 50)
+        button_exit = pygame.Rect(600, screen_height - 200, 100, 50)
+        button_cosmetics = pygame.Rect(800 ,500, 50, 50)
+
+        #Exit game
+        if button_exit.collidepoint((mx,my)):
+            if click:
+                quit()
+
+        #Options
+        if button_options.collidepoint((mx,my)):
+            if click:
+                options()
+
+        #Start game
+        if button_start.collidepoint((mx,my)):
+            if click:
+                game()
+
+        #Cosmetics menu
+        if button_cosmetics.collidepoint((mx, my)):
+            if click:
+                cosmetics()
+
+
+#OPTIONS MENU
+def options():
+    running = True
+    while running:
+
+
+#Audio Settings
+
+
+
+#COSMETICS MENU
+def cosmetics():
+    running = True
+    while running:
+
+
+
+#EXIT CALL
+def quit():
+    running = True
+    while running:
+        screen.fill(black)
+        create_text("Are you sure you want to exit Snake Game Classic?", font, title_color, screen, screen_width / 2, 100)
+        mx, my = pygame.mouse.get_pos()
+
+        button_exit = pygame.Rect(screen_width/3, screen_height/2, 100, 50)
+        button_return = pygame.Rect(2 * screen_width/3, screen_height/2, 100, 50)
+
+        #Exit the program
+        if button_exit.collidepoint((mx,my)):
+            if click:
+                return 1;
+
+        #Return to the main menu
+        if button_return.collidepoint((mx,my)):
+            if click:
+                main_menu()
+
+
 
 
 #GAME
-def game_loop():
+def game():
+    running = True
+    while running:
