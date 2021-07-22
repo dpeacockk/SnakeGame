@@ -28,6 +28,8 @@ menu_text_color = (0,50,0)
 title_color = (150,240,50)
 black = (0,0,0)
 
+#Variable to control audio
+audio_on = True
 
 #Functions
 #Function to create text on the screen
@@ -47,7 +49,7 @@ def main_menu():
 
         #Buttons 1,2,3 are Start, Options, Exit, respectively
         button_start = pygame.Rect(200, screen_height-200, 100, 50)
-        button_options = pygame.Rect(400, screen_height-200, 100, 50)
+        button_audio = pygame.Rect(400, screen_height-200, 100, 50)
         button_exit = pygame.Rect(600, screen_height - 200, 100, 50)
         button_cosmetics = pygame.Rect(800 ,500, 50, 50)
 
@@ -56,10 +58,10 @@ def main_menu():
             if click:
                 quit()
 
-        #Options
+        #Audio
         if button_options.collidepoint((mx,my)):
             if click:
-                options()
+                audio()
 
         #Start game
         if button_start.collidepoint((mx,my)):
@@ -71,14 +73,38 @@ def main_menu():
             if click:
                 cosmetics()
 
+        click = False
+        for event in pygame.event.get():
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click == True
 
-#OPTIONS MENU
+
+#OPTIONS MENU (possibly delete if unnecessary)
 def options():
     running = True
     while running:
+        screen.image.load('soft_green_back.png').convert()
+        create_text("Options", font, title_color, screen, screen_width / 2, 100)
+
+        mx, my = pygame.mouse.get_pos()
+
+        # Buttons
+        button_audio = pygame.Rect(200, screen_height - 200, 100, 50)
+        button_back = pygame.Rect(400, screen_height - 200, 100, 50)
+        button_credits = pygame.Rect(600, screen_height - 200, 100, 50)
+        button_cosmetics = pygame.Rect(800, 500, 50, 50)
 
 
-#Audio Settings
+#Audio Settings(if audio is on before click, turn it off.
+def audio():
+    if(audio_on):
+        pygame.mixer.pause()
+        audio_on = False
+    else:
+        pygame.mixer.unpause()
+        audio_on = True
+
 
 
 
@@ -86,6 +112,7 @@ def options():
 def cosmetics():
     running = True
     while running:
+        screen.image.load('soft_green_back.png').convert()
 
 
 
@@ -100,10 +127,11 @@ def quit():
         button_exit = pygame.Rect(screen_width/3, screen_height/2, 100, 50)
         button_return = pygame.Rect(2 * screen_width/3, screen_height/2, 100, 50)
 
-        #Exit the program
+        #EXIT THE PROGRAM
         if button_exit.collidepoint((mx,my)):
             if click:
-                return 1;
+                pygame.quit()
+                sys.exit()
 
         #Return to the main menu
         if button_return.collidepoint((mx,my)):
