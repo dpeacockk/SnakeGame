@@ -27,9 +27,11 @@ snake_color = (150,240,0)
 menu_text_color = (0,50,0)
 title_color = (150,240,50)
 black = (0,0,0)
+red = (255,0,0)
 
 #Variable to control audio
-audio_on = True
+pygame.mixer.Sound(SnoopDogg.mp3)
+pygame.mixer.Sound.play(-1,0,0)
 
 #Functions
 #Function to create text on the screen
@@ -96,15 +98,12 @@ def options():
         button_cosmetics = pygame.Rect(800, 500, 50, 50)
 
 
-#Audio Settings(if audio is on before click, turn it off.
+#Audio Settings(if audio is on before click, turn it off)
 def audio():
-    if(audio_on):
+    if pygame.mixer.get_busy():
         pygame.mixer.pause()
-        audio_on = False
     else:
         pygame.mixer.unpause()
-        audio_on = True
-
 
 
 
@@ -145,3 +144,13 @@ def quit():
 def game():
     running = True
     while running:
+        for event in pygame.event.get()
+            if event.type==pygame.QUIT:
+                running = False
+
+        #creating the snake
+        pygame.draw.rect(screen,snake_color, [screen_width/2,screen_height/2,10,10])
+    #Offer option to go to main menu, and if "quit" clicked, exit game
+
+    pygame.quit()
+    quit()
